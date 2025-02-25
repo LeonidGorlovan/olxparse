@@ -32,7 +32,7 @@ class SendPriceChangeNotification implements ShouldQueue
 
     public function handle(): void
     {
-        \Log::info("Отправка уведомления на {$this->subscriber->email}");
+        \Log::info("Sending a notification to {$this->subscriber->email}");
 
         $this->subscriber->notify(new PriceChanged(
             $this->link,

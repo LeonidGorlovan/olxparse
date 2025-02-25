@@ -45,12 +45,12 @@ class CheckPriceChanges implements ShouldQueue
         $currency = isset($matches[2]) ? trim($matches[2]) : null;
 
         if ($price === null || $currency === null) {
-            \Log::warning("Не удалось распознать цену или валюту для ссылки: {$linkUrl}");
+            \Log::warning("Failed to recognize the price or currency for the link: {$linkUrl}");
             return;
         }
 
         if ($this->link->price !== null && $this->link->currency === $currency && $this->link->price != $price) {
-            $this->link->subscribers()->chunk(1000, function ($subscribers) use ($linkUrl, $price, $currency) {
+            $this->link->subscribers()->verified()->chunk(1000, function ($subscribers) use ($linkUrl, $price, $currency) {
                 $jobs = $subscribers->map(function ($subscriber) use ($linkUrl, $price, $currency) {
                     return new SendPriceChangeNotification(
                         $subscriber,
@@ -63,10 +63,10 @@ class CheckPriceChanges implements ShouldQueue
 
                 Bus::batch($jobs)
                     ->then(function () use ($linkUrl, $price) {
-                        \Log::info("Все уведомления для ссылки $linkUrl отправлены (новая цена: $price)");
+                        \Log::info("All notifications for the link $linkUrl shipped (new price: $price)");
                     })
                     ->catch(function (Batch $batch, \Throwable $e) use ($linkUrl) {
-                        \Log::error("Ошибка в пакете уведомлений для $linkUrl: " . $e->getMessage());
+                        \Log::error("Error in the notification packet for $linkUrl: " . $e->getMessage());
                     })
                     ->dispatch();
             });
