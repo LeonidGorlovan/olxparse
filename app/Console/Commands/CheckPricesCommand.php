@@ -2,11 +2,11 @@
 
 namespace App\Console\Commands;
 
-use App\Jobs\CheckPriceChanges;
+use App\Jobs\CheckPriceChangesJob;
 use App\Models\Link;
 use Illuminate\Console\Command;
 
-class CheckPrices extends Command
+class CheckPricesCommand extends Command
 {
     protected $signature = 'prices:check';
     protected $description = 'Check prices for all links';
@@ -16,7 +16,7 @@ class CheckPrices extends Command
         $links = Link::all();
 
         foreach ($links as $link) {
-            CheckPriceChanges::dispatch($link);
+            CheckPriceChangesJob::dispatch($link);
         }
 
         $this->info('Price checks dispatched.');

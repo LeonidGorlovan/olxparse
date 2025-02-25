@@ -3,7 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\Subscribers;
-use App\Notifications\PriceChanged;
+use App\Notifications\PriceChangedNotification;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -11,7 +11,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class SendPriceChangeNotification implements ShouldQueue
+class SendPriceChangeJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Batchable;
 
@@ -34,7 +34,7 @@ class SendPriceChangeNotification implements ShouldQueue
     {
         \Log::info("Sending a notification to {$this->subscriber->email}");
 
-        $this->subscriber->notify(new PriceChanged(
+        $this->subscriber->notify(new PriceChangedNotification(
             $this->link,
             $this->oldPrice,
             $this->newPrice,

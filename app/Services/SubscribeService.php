@@ -19,7 +19,7 @@ class SubscribeService
         try {
             DB::beginTransaction();
 
-            $subscribers = Subscribers::firstOrCreate([
+            $subscriber = Subscribers::firstOrCreate([
                 'email' => $postData['email'],
             ], [
                 'email_verified_code' => Str::uuid()
@@ -29,12 +29,12 @@ class SubscribeService
                 'link' => $postData['link'],
             ]);
 
-            $subscribers->links()->syncWithoutDetaching([$link->id]);
-            $subscribers->load('links');
+            $subscriber->links()->syncWithoutDetaching([$link->id]);
+            $subscriber->load('links');
 
             DB::commit();
 
-            return $subscribers;
+            return $subscriber;
         } catch (Throwable $th) {
             DB::rollBack();
 

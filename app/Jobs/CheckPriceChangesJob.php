@@ -14,7 +14,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Bus;
 use Symfony\Component\DomCrawler\Crawler;
 
-class CheckPriceChanges implements ShouldQueue
+class CheckPriceChangesJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -52,7 +52,7 @@ class CheckPriceChanges implements ShouldQueue
         if ($this->link->price !== null && $this->link->currency === $currency && $this->link->price != $price) {
             $this->link->subscribers()->verified()->chunk(1000, function ($subscribers) use ($linkUrl, $price, $currency) {
                 $jobs = $subscribers->map(function ($subscriber) use ($linkUrl, $price, $currency) {
-                    return new SendPriceChangeNotification(
+                    return new SendPriceChangeJob(
                         $subscriber,
                         $linkUrl,
                         $this->link->price,
