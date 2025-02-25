@@ -12,6 +12,8 @@ class SubscribeResource extends JsonResource
         return [
             'id' => $this->id,
             'email' => $this->email,
+            'email_verified_code' => $this->email_verified_code,
+            'email_verified_at' => $this->email_verified_at,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'links' => new LinksMiniCollection($this->whenLoaded('links')),
