@@ -1,0 +1,152 @@
+{
+	"info": {
+		"_postman_id": "71cdac72-3c5d-4429-b077-d695373e0072",
+		"name": "subscribers",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16892882"
+	},
+	"item": [
+		{
+			"name": "subscribe",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"asxdracrgerg@mail.com\",\n    \"link\": \"https://www.olx.ua/d/uk/obyavlenie/geely-emgrand7-IDVC88f.html\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/subscribe",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"subscribe"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "subscribe",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"asxdracrgerg@mail.com\",\n    \"link\": \"https://www.olx.ua/d/uk/obyavlenie/geely-emgrand7-IDVC88f.html\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/subscribe",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"subscribe"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8080"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.4.3"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 25 Feb 2025 15:47:51 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": 16,\n        \"email\": \"asxdracrgerg@mail.com\",\n        \"email_verified_code\": null,\n        \"email_verified_at\": \"2025-02-25 17:47:46\",\n        \"created_at\": \"2025-02-25T15:47:31.000000Z\",\n        \"updated_at\": \"2025-02-25T15:47:46.000000Z\",\n        \"links\": [\n            [\n                {\n                    \"id\": 5,\n                    \"link\": \"https://www.olx.ua/d/uk/obyavlenie/geely-emgrand7-IDVC88f.html\"\n                }\n            ]\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "email/confirmation",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"bbefsssfw4fwfыыы@mail.com\",\n    \"link\": \"https://www.olx.ua/d/uk/obyavlenie/geely-emgrand7-IDVC88f.html\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/email/confirmation/506da52b-f9a0-4c36-bdf4-e811f7218175",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"email",
+						"confirmation",
+						"506da52b-f9a0-4c36-bdf4-e811f7218175"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
